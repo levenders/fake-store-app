@@ -17,7 +17,9 @@
     "@typescript-eslint/consistent-type-imports": [
       2,
       { "fixStyle": "separate-type-imports" }
-    ]
+    ],
+    "no-console": "warn",
+    "import/prefer-default-export": "off"
   },
   "overrides": [
     { "files": ["*.{c,m,}{t,j}s", "*.{t,j}sx"] },
