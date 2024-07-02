@@ -1,23 +1,16 @@
 import React from 'react'
 
 import { Provider } from 'react-redux'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { RouterProvider } from 'react-router-dom'
 
 import { createRoot } from 'react-dom/client'
 
-import App from './App'
 import { store } from './store'
+import { router } from './utils'
 
 import './index.css'
 
 const container = document.getElementById('root')
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-  },
-])
 
 if (container) {
   const root = createRoot(container)

@@ -20,7 +20,8 @@
       "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@types/*": ["src/types/*"],
-      "@store/*": ["src/store/*"]
+      "@store/*": ["src/store/*"],
+      "@utils/*": ["src/store/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
