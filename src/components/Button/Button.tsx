@@ -1,10 +1,10 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
 import cn from 'classnames'
 
 import s from './Button.module.css'
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   children: ReactNode
 }
 
