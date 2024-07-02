@@ -1,0 +1,9 @@
+.input {
+  font-size: 17px;
+  color: var(--primery-black);
+
+  border: 1px solid var(--primery-pink);
+  border-radius: 10px;
+
+  padding: 10px;
+}
