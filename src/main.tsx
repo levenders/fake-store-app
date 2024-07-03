@@ -5,10 +5,10 @@ import { RouterProvider } from 'react-router-dom'
 
 import { createRoot } from 'react-dom/client'
 
-import { store } from './store'
-import { router } from './utils'
+import { router } from '@/router'
+import { store } from '@/store'
 
-import './index.css'
+import './global.css'
 
 const container = document.getElementById('root')
 
