@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 
 import s from './Headling.module.css'
 
-type HeadlingProps = {
+interface HeadlingProps {
   children: ReactNode
 }
 
