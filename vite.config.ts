@@ -11,6 +11,9 @@ export default defineConfig({
       '@types': '/src/types',
       '@store': '/src/store',
       '@pages': '/src/pages',
+      '@config': '/src/config',
+      '@hooks': '/src/hooks',
+      '@constants': '/src/constants',
     },
   },
   server: {
