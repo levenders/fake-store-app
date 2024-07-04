@@ -13,7 +13,7 @@ import s from './Form.module.css'
 
 interface FormProps extends ComponentPropsWithoutRef<'form'> {
   title: string
-  handleClick: (email: string, password: string) => void
+  handleClick: (userData: { email: string; password: string }) => void
 }
 
 export const Form = ({ title, handleClick }: FormProps) => {
@@ -22,7 +22,7 @@ export const Form = ({ title, handleClick }: FormProps) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    handleClick(email, password)
+    handleClick({ email, password })
   }
 
   const handleChange =
