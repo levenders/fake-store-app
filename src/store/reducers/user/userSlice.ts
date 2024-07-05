@@ -21,14 +21,6 @@ const loadUserFromLocalStorage = (): UserState => {
   return initialState
 }
 
-const setUserToLocalStorage = (user: UserState) => {
-  localStorage.setItem('user', JSON.stringify(user))
-}
-
-const removeUserIntoLocalStorage = () => {
-  localStorage.removeItem('user')
-}
-
 const userSlice = createSlice({
   name: 'user',
   initialState: loadUserFromLocalStorage(),
@@ -37,7 +29,6 @@ const userSlice = createSlice({
       state.email = null
       state.id = null
       state.error = null
-      removeUserIntoLocalStorage()
     },
   },
   extraReducers: builder => {
@@ -50,7 +41,6 @@ const userSlice = createSlice({
         ) => {
           state.email = action.payload.email
           state.id = action.payload.uid
-          setUserToLocalStorage(state)
         },
       )
       .addCase(loginUser.rejected, (state, action) => {
@@ -64,7 +54,6 @@ const userSlice = createSlice({
         ) => {
           state.email = action.payload.email
           state.id = action.payload.uid
-          setUserToLocalStorage(state)
         },
       )
       .addCase(registerUser.rejected, (state, action) => {

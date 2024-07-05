@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { Form } from '@/components'
-import { useAppDispatch, useAppSelector } from '@/hooks'
+import { useAppDispatch, useAuth } from '@/hooks'
 import { registerUser } from '@/store'
 import type { FormUserData } from '@/types/user'
 
@@ -12,14 +12,14 @@ import s from './RegisterPage.module.css'
 export const RegisterPage = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const { id } = useAppSelector(state => state.user)
+  const { isAuth } = useAuth()
 
   const handleClick = (userData: FormUserData) => {
     dispatch(registerUser(userData))
   }
 
   useEffect(() => {
-    if (id) {
+    if (isAuth) {
       navigate('/')
     }
   })

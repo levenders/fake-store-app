@@ -3,26 +3,27 @@ import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { Form } from '@/components'
-import { useAppDispatch, useAppSelector } from '@/hooks'
+import { useAppDispatch } from '@/hooks'
 import { loginUser } from '@/store'
 import type { FormUserData } from '@/types/user'
 
 import s from './LoginPage.module.css'
+import { useAuth } from '@/hooks'
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const { id } = useAppSelector(state => state.user)
+  const { isAuth } = useAuth()
 
   const handleClick = (userData: FormUserData) => {
     dispatch(loginUser(userData))
   }
 
   useEffect(() => {
-    if (id) {
+    if (isAuth) {
       navigate('/')
     }
-  })
+  }, [isAuth, navigate])
 
   return (
     <div className={s.container}>

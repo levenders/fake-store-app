@@ -1,11 +1,7 @@
-import { useAppSelector } from '@/hooks'
-
 export function useAuth() {
-  const { email, id } = useAppSelector(state => state.user)
+  const user = localStorage.getItem('user')
 
   return {
-    isAuth: !!id,
-    email,
-    id,
+    isAuth: !!user,
   }
 }
