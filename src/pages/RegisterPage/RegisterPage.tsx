@@ -22,7 +22,7 @@ export const RegisterPage = () => {
     if (isAuth) {
       navigate('/')
     }
-  })
+  }, [isAuth, navigate])
 
   return (
     <div className={s.container}>

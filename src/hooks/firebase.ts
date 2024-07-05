@@ -11,7 +11,7 @@ export function useAuth() {
     } else {
       setIsAuth(false)
     }
-  }, [id, isAuth])
+  }, [id])
 
   return {
     isAuth,
