@@ -1,0 +1,1 @@
+export { localStorageMiddleware } from './localStorageMiddleware'
