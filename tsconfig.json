@@ -24,7 +24,9 @@
       "@pages/*": ["src/pages/*"],
       "@config/*": ["src/config/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@constants/*": ["src/constants/*"]
+      "@constants/*": ["src/constants/*"],
+      "@services/*": ["src/services/*"],
+      "@helpers/*": ["src/helpers/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
