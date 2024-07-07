@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom'
 
 import { Button } from '@/components'
 import { getPriceUsd } from '@/helpers'
-import type { ProductItem } from '@/types'
+import type { TransformProductItem } from '@/types'
 
 import s from './Product.module.css'
 
 interface ProductProps extends ComponentPropsWithoutRef<'link'> {
-  product: ProductItem
+  product: TransformProductItem
 }
 
 export const Product = ({ product }: ProductProps) => {
