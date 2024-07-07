@@ -11,13 +11,12 @@ export const parseLoadedProducts = (
       description: item.description,
       image: item.image,
     }))
-  } else {
-    return {
-      id: response.id,
-      title: response.title,
-      price: response.price,
-      description: response.description,
-      image: response.image,
-    }
+  }
+  return {
+    id: response.id,
+    title: response.title,
+    price: response.price,
+    description: response.description,
+    image: response.image,
   }
 }

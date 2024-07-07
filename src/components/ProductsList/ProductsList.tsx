@@ -1,4 +1,4 @@
-import { useEffect, useState, type ComponentPropsWithoutRef } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Button, Product } from '@/components'
 
@@ -6,9 +6,7 @@ import { productApi } from '@/services'
 
 import s from './ProductsList.module.css'
 
-interface ProductsListProps extends ComponentPropsWithoutRef<'div'> {}
-
-export const ProductsList = ({ ...props }: ProductsListProps) => {
+export const ProductsList = () => {
   const [limit, setLimit] = useState<number>(5)
   const [visibilityButton, setvisibilityButton] = useState<boolean>(true)
 
@@ -23,7 +21,9 @@ export const ProductsList = ({ ...props }: ProductsListProps) => {
   }
 
   useEffect(() => {
-    limit === 20 && setvisibilityButton(false)
+    if (limit === 20) {
+      setvisibilityButton(false)
+    }
     //у API нет специального эндпоинта для получения только количества элементов, поэтому тут вручную прописал 20
   }, [limit])
 
@@ -34,7 +34,7 @@ export const ProductsList = ({ ...props }: ProductsListProps) => {
         <h3 className={s.error}>Произошла ошибка. Перезагрузите страницу</h3>
       )}
       {products && (
-        <div className={s.container} {...props}>
+        <div className={s.container}>
           <div className={s.list}>
             {products.map(p => (
               <Product key={p.id} product={p} />
