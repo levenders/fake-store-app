@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.list {
+  margin: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 40px;
+}
+
+.button {
+  height: 50px;
+  width: 50px;
+  padding: 5px;
+  text-align: center;
+  margin: auto 30px 30px auto;
+}
+
+.isLoading,
+.error {
+  text-align: center;
+  margin-top: 80px;
+}
