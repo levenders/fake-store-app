@@ -7,7 +7,7 @@
   margin: 60px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-around;
   gap: 40px;
 }
 
