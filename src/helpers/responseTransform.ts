@@ -1,17 +1,8 @@
 import type { ProductItem, TransformProductItem } from '@/types'
 
-export const parseLoadedProducts = (
-  response: ProductItem | ProductItem[],
-): TransformProductItem | TransformProductItem[] => {
-  if (Array.isArray(response)) {
-    return response.map(item => ({
-      id: item.id,
-      title: item.title,
-      price: item.price,
-      description: item.description,
-      image: item.image,
-    }))
-  }
+export const parseLoadedSingleProduct = (
+  response: ProductItem,
+): TransformProductItem => {
   return {
     id: response.id,
     title: response.title,
@@ -19,4 +10,10 @@ export const parseLoadedProducts = (
     description: response.description,
     image: response.image,
   }
+}
+
+export const parseLoadedAllProducts = (
+  response: ProductItem[],
+): TransformProductItem[] => {
+  return response.map(parseLoadedSingleProduct)
 }

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API } from '@/constants'
 import type { ProductItem, TransformProductItem } from '@/types'
-import { parseLoadedProducts } from '@/helpers'
+import { parseLoadedAllProducts, parseLoadedSingleProduct } from '@/helpers'
 
 export const productApi = createApi({
   reducerPath: 'products',
@@ -15,18 +15,14 @@ export const productApi = createApi({
           limit: limit,
         },
       }),
-      transformResponse: (response: ProductItem[]) => {
-        return parseLoadedProducts(response) as TransformProductItem[]
-      },
+      transformResponse: parseLoadedAllProducts,
     }),
     getProduct: build.query({
       query: (id: string | undefined) => ({
         url: `/products/${id}`,
         method: 'GET',
       }),
-      transformResponse: (response: ProductItem) => {
-        return parseLoadedProducts(response) as TransformProductItem
-      },
+      transformResponse: parseLoadedSingleProduct,
     }),
   }),
 })
