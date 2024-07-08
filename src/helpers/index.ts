@@ -1,2 +1,5 @@
 export { getPriceUsd } from './getPrice'
-export { parseLoadedProducts } from './responseTransform'
+export {
+  parseLoadedSingleProduct,
+  parseLoadedAllProducts,
+} from './responseTransform'

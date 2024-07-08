@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API } from '@/constants'
-import type { ProductItem, TransformProductItem } from '@/types'
+import type { TransformProductItem } from '@/types'
 import { parseLoadedAllProducts, parseLoadedSingleProduct } from '@/helpers'
 
 export const productApi = createApi({
