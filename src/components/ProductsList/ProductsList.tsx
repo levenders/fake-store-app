@@ -10,11 +10,7 @@ export const ProductsList = () => {
   const [limit, setLimit] = useState<number>(5)
   const [visibilityButton, setvisibilityButton] = useState<boolean>(true)
 
-  const {
-    data: products,
-    isLoading,
-    error,
-  } = productApi.useGetAllProductsQuery(limit)
+  const { data: products, error } = productApi.useGetAllProductsQuery(limit)
 
   const handlerClick = () => {
     setLimit(prevLimit => prevLimit + 5)
@@ -29,7 +25,6 @@ export const ProductsList = () => {
 
   return (
     <>
-      {isLoading && <h3 className={s.isLoading}>Идет загрузка продуктов...</h3>}
       {error && (
         <h3 className={s.error}>Произошла ошибка. Перезагрузите страницу</h3>
       )}

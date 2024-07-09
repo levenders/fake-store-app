@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { Button, Headling } from '@/components'
+import { Button, Headling, Loader } from '@/components'
 import { getPriceUsd } from '@/helpers'
 import { productApi } from '@/services'
 
@@ -14,7 +14,7 @@ export const ProductPage = () => {
 
   return (
     <>
-      {isLoading && <h3 className={s.isLoading}>Идет загрузка товара...</h3>}
+      {isLoading && <Loader />}
       {error && (
         <h3 className={s.error}>Произошла ошибка. Перезагрузите страницу</h3>
       )}

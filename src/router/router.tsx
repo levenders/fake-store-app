@@ -1,5 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom'
 
+import { ErrorBoundary } from 'react-error-boundary'
+
+import { Error } from '@/components'
 import { Header } from '@/layout'
 import {
   HomePage,
@@ -13,9 +16,11 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: (
-      <ProtectedRoutePage>
-        <Header />
-      </ProtectedRoutePage>
+      <ErrorBoundary fallback={<Error />}>
+        <ProtectedRoutePage>
+          <Header />
+        </ProtectedRoutePage>
+      </ErrorBoundary>
     ),
     children: [
       {
