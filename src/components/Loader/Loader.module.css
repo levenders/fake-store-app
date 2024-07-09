@@ -1,0 +1,15 @@
+.loader {
+  margin: 25px auto;
+  display: block;
+  height: 55px;
+  width: 55px;
+  background-color: var(--primery-dark-gray);
+  mask-image: url('/ui-icons/loader.svg');
+  animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
