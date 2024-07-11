@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { Button, Headling, Loader } from '@/components'
-import { getPriceUsd } from '@/helpers'
-import { productApi } from '@/services'
+import { getPriceUsd } from '@/helpers/getPrice'
+import { productApi } from '@/services/productsService'
 
 import s from './ProductPage.module.css'
 

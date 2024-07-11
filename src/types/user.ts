@@ -1,9 +1,4 @@
-export type FormUserData = {
-  email: string
-  password: string
-}
-
-export type UserRequestData = {
-  email: string
+export type User = {
+  email: string | null
   uid: string
 }

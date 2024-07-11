@@ -1,19 +1,20 @@
-import { productApi } from '@/services'
+import { useDispatch } from 'react-redux'
+
+import { productApi } from '@/services/productsService'
 import { configureStore } from '@reduxjs/toolkit'
-import { localStorageMiddleware } from '@store/middlewares'
-import userSlice from '@store/reducers/user/userSlice'
+import { userSlice } from '@/store/userSlice'
 
 export const store = configureStore({
   reducer: {
-    user: userSlice,
+    userSlice: userSlice.reducer,
     [productApi.reducerPath]: productApi.reducer,
   },
 
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware()
-      .concat(localStorageMiddleware.middleware)
-      .concat(productApi.middleware),
+    getDefaultMiddleware().concat(productApi.middleware),
 })
+
+export const useAppDispatch = () => useDispatch<AppDispatch>()
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

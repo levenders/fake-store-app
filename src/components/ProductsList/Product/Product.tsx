@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/components'
-import { getPriceUsd } from '@/helpers'
+import { getPriceUsd } from '@/helpers/getPrice'
 import type { TransformProductItem } from '@/types'
 
 import s from './Product.module.css'

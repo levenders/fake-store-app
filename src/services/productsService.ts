@@ -1,7 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { API } from '@/constants'
+import { API } from '@/constants/url'
 import type { TransformProductItem } from '@/types'
-import { parseLoadedAllProducts, parseLoadedSingleProduct } from '@/helpers'
+import {
+  parseLoadedAllProducts,
+  parseLoadedSingleProduct,
+} from '@/helpers/responseTransform'
 
 export const productApi = createApi({
   reducerPath: 'products',
