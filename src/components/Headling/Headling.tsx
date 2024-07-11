@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react'
 
+import PropTypes from 'prop-types'
+
 import s from './Headling.module.css'
 
 interface HeadlingProps {
@@ -12,4 +14,8 @@ export const Headling = ({ children, ...props }: HeadlingProps) => {
       {children}
     </h1>
   )
+}
+
+Headling.propTypes = {
+  children: PropTypes.node.isRequired,
 }

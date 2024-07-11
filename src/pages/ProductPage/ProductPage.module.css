@@ -10,6 +10,14 @@
   padding: 60px;
 }
 
+.light {
+  background: var(--primary-white);
+}
+
+.dark {
+  background: var(--primery-light-gray);
+}
+
 .lside {
   display: flex;
   flex-direction: column;

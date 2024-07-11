@@ -17,6 +17,7 @@ export default defineConfig({
       '@services': '/src/services',
       '@helpers': '/src/helpers',
       '@layout': '/src/layout',
+      '@context': '/src/context',
     },
   },
   server: {

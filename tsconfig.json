@@ -27,7 +27,8 @@
       "@constants/*": ["src/constants/*"],
       "@services/*": ["src/services/*"],
       "@helpers/*": ["src/helpers/*"],
-      "@layout/*": ["src/layout/*"]
+      "@layout/*": ["src/layout/*"],
+      "@context/*": ["src/context/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],

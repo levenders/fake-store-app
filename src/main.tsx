@@ -5,6 +5,7 @@ import { RouterProvider } from 'react-router-dom'
 import { ErrorBoundary } from 'react-error-boundary'
 
 import { Error } from '@/components'
+import { ThemeProvider } from '@/context'
 import { router } from '@/router'
 import { store } from '@/store'
 import '@/config/firebase'
@@ -14,9 +15,11 @@ import './global.css'
 createRoot(document.querySelector('#root')!).render(
   <StrictMode>
     <ErrorBoundary fallback={<Error />}>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
+      <ThemeProvider>
+        <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
+      </ThemeProvider>
     </ErrorBoundary>
   </StrictMode>,
 )
