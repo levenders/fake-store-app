@@ -11,3 +11,10 @@
   height: 100px;
   margin: 20px;
 }
+
+.button {
+  display: flex;
+  height: 60px;
+  align-items: center;
+  align-self: center;
+}

@@ -1,44 +1,37 @@
 import { createBrowserRouter } from 'react-router-dom'
 
-import { ErrorBoundary } from 'react-error-boundary'
-
-import { Error } from '@/components'
-import { Header } from '@/layout'
-import {
-  HomePage,
-  LoginPage,
-  ProductPage,
-  ProtectedRoutePage,
-  RegisterPage,
-} from '@/pages'
+import { HomePage, LoginPage, ProductPage, RegisterPage } from '@/pages'
+import { MainLayout } from '@/layout/MainLayout'
+import { ROUTES } from '@/constants/routes'
 
 export const router = createBrowserRouter([
   {
-    path: '/',
-    element: (
-      <ErrorBoundary fallback={<Error />}>
-        <ProtectedRoutePage>
-          <Header />
-        </ProtectedRoutePage>
-      </ErrorBoundary>
-    ),
+    path: ROUTES.HOME,
+    element: <MainLayout isHeaderVisible />,
     children: [
       {
-        path: '/',
+        path: ROUTES.HOME,
         element: <HomePage />,
       },
       {
-        path: '/product/:id',
+        path: ROUTES.PRODUCT,
         element: <ProductPage />,
       },
     ],
   },
+
   {
-    path: '/login',
-    element: <LoginPage />,
-  },
-  {
-    path: '/register',
-    element: <RegisterPage />,
+    path: ROUTES.AUTH,
+    element: <MainLayout />,
+    children: [
+      {
+        path: ROUTES.LOGIN,
+        element: <LoginPage />,
+      },
+      {
+        path: ROUTES.REGISTER,
+        element: <RegisterPage />,
+      },
+    ],
   },
 ])

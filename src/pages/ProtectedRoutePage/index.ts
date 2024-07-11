@@ -1,1 +1,0 @@
-export { ProtectedRoutePage } from './ProtectedRoutePage'

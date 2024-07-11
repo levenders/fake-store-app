@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { Button, Product } from '@/components'
 
-import { productApi } from '@/services'
+import { productApi } from '@/services/productsService'
 
 import s from './ProductsList.module.css'
 
@@ -20,7 +20,7 @@ export const ProductsList = () => {
     if (limit === 20) {
       setvisibilityButton(false)
     }
-    //у API нет специального эндпоинта для получения только количества элементов, поэтому тут вручную прописал 20
+    // у API нет специального эндпоинта для получения только количества элементов, поэтому тут вручную прописал 20
   }, [limit])
 
   return (
