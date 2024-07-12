@@ -26,9 +26,11 @@
 }
 
 .title {
+  display: flex;
+  align-items: center;
   text-align: center;
   font-weight: bold;
-  height: 70px;
+  height: 80px;
   font-size: 18px;
   overflow: hidden;
 }
