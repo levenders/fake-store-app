@@ -23,12 +23,13 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     setIsTheme(isTheme === 'light' ? 'dark' : 'light')
   }, [isTheme])
 
+  const memoValue = useMemo(
+    () => ({ isTheme, toggleTheme }),
+    [isTheme, toggleTheme],
+  )
+
   return (
-    <ThemeContext.Provider
-      value={useMemo(() => ({ isTheme, toggleTheme }), [isTheme, toggleTheme])}
-    >
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={memoValue}>{children}</ThemeContext.Provider>
   )
 }
 
