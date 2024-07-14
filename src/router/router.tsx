@@ -1,6 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom'
 
-import { HomePage, LoginPage, ProductPage, RegisterPage } from '@/pages'
+import {
+  HomePage,
+  LoginPage,
+  ProductPage,
+  RegisterPage,
+  CartPage,
+} from '@/pages'
 import { MainLayout } from '@/layout/MainLayout'
 import { ROUTES } from '@/constants/routes'
 
@@ -16,6 +22,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.PRODUCT,
         element: <ProductPage />,
+      },
+      {
+        path: ROUTES.CART,
+        element: <CartPage />,
       },
     ],
   },
