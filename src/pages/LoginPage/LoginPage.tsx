@@ -18,7 +18,7 @@ export const LoginPage = () => {
     <div className={s.container}>
       <Form title="Вход" handleClick={handleClick}></Form>
       <p>
-        Нет аккаунта? <Link to={ROUTES.REGISTER}>Войти</Link>
+        Нет аккаунта? <Link to={ROUTES.REGISTER}>Регистрация</Link>
       </p>
     </div>
   )
