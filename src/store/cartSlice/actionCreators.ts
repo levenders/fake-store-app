@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { arrayUnion, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 
-import { getCartRef, getCurrentUser } from '@/helpers/cart'
+import { getCartRef } from '@/helpers/getRef'
+import { getCurrentUser } from '@/helpers/getCurrentUser'
 import type { CartItem } from '@/types/cart'
 
 export const addToCart = createAsyncThunk(
