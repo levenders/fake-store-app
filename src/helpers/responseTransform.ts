@@ -1,3 +1,4 @@
+import type { FetchBaseQueryMeta } from '@reduxjs/toolkit/query'
 import type { ProductItem, TransformProductItem } from '@/types'
 
 export const parseLoadedSingleProduct = (
@@ -16,4 +17,18 @@ export const parseLoadedAllProducts = (
   response: ProductItem[],
 ): TransformProductItem[] => {
   return response.map(parseLoadedSingleProduct)
+}
+
+export const parseSearchProducts = (
+  response: ProductItem[],
+  _: FetchBaseQueryMeta | undefined,
+  arg: string,
+): TransformProductItem[] => {
+  if (!arg) {
+    return []
+  }
+
+  return response
+    .map(parseLoadedSingleProduct)
+    .filter(product => product.title.toLowerCase().includes(arg.toLowerCase()))
 }
