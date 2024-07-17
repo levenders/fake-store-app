@@ -4,6 +4,7 @@ import type { TransformProductItem } from '@/types'
 import {
   parseLoadedAllProducts,
   parseLoadedSingleProduct,
+  parseSearchProducts,
 } from '@/helpers/responseTransform'
 
 export const productApi = createApi({
@@ -13,7 +14,6 @@ export const productApi = createApi({
     getAllProducts: build.query<TransformProductItem[], number>({
       query: (limit: number = 5) => ({
         url: '/products',
-        method: 'GET',
         params: {
           limit: limit,
         },
@@ -23,9 +23,14 @@ export const productApi = createApi({
     getProduct: build.query({
       query: (id: string | undefined) => ({
         url: `/products/${id}`,
-        method: 'GET',
       }),
       transformResponse: parseLoadedSingleProduct,
+    }),
+    searchProducts: build.query<TransformProductItem[] | null, string>({
+      query: () => ({
+        url: '/products',
+      }),
+      transformResponse: parseSearchProducts,
     }),
   }),
 })
