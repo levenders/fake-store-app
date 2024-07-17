@@ -6,6 +6,8 @@ import {
   ProductPage,
   RegisterPage,
   CartPage,
+  HistoryPage,
+  SearchPage,
 } from '@/pages'
 import { MainLayout } from '@/layout/MainLayout'
 import { ROUTES } from '@/constants/routes'
@@ -26,6 +28,14 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.CART,
         element: <CartPage />,
+      },
+      {
+        path: ROUTES.HISTORY,
+        element: <HistoryPage />,
+      },
+      {
+        path: ROUTES.SEARCH,
+        element: <SearchPage />,
       },
     ],
   },
