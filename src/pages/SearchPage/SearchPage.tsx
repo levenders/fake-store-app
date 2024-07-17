@@ -9,11 +9,13 @@ import s from './SearchPage.module.css'
 export const SearchPage = () => {
   const { query } = useParams()
 
+  const skipQuery = query === '' || query === undefined
+
   const {
     data: products,
     isLoading,
     error,
-  } = productApi.useSearchProductsQuery(query || '')
+  } = productApi.useSearchProductsQuery(query || '', { skip: skipQuery })
 
   if (products === null) {
     return (
