@@ -23,12 +23,18 @@ export const parseSearchProducts = (
   response: ProductItem[],
   _: FetchBaseQueryMeta | undefined,
   arg: string,
-): TransformProductItem[] => {
+): TransformProductItem[] | null => {
   if (!arg) {
     return []
   }
 
-  return response
+  const filteredProducts = response
     .map(parseLoadedSingleProduct)
     .filter(product => product.title.toLowerCase().includes(arg.toLowerCase()))
+
+  if (filteredProducts.length === 0) {
+    return null
+  }
+
+  return filteredProducts
 }

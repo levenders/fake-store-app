@@ -26,7 +26,7 @@ export const productApi = createApi({
       }),
       transformResponse: parseLoadedSingleProduct,
     }),
-    searchProducts: build.query<TransformProductItem[], string>({
+    searchProducts: build.query<TransformProductItem[] | null, string>({
       query: () => ({
         url: '/products',
       }),
