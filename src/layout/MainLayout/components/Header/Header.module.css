@@ -43,14 +43,14 @@
 }
 
 .cartIcon {
-  display: block;
-  height: 35px;
-  width: 35px;
-  background-color: var(--primery-dark-gray);
   mask-image: url('/ui-icons/cart.svg');
 }
 
-.cartLink {
+.historyIcon {
+  mask-image: url('/ui-icons/history.svg');
+}
+
+.link {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -67,11 +67,11 @@
   text-decoration: none;
 }
 
-.cartLink:hover {
+.link:hover {
   opacity: 0.75;
 }
 
-.cartCounter {
+.counter {
   display: flex;
   align-items: center;
   font-size: 16px;
