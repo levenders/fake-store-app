@@ -1,4 +1,5 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createRoutesFromElements, Route } from 'react-router-dom'
+import { createHashRouter } from 'react-router-dom'
 
 import {
   HomePage,
@@ -12,46 +13,21 @@ import {
 import { MainLayout } from '@/layout/MainLayout'
 import { ROUTES } from '@/constants/routes'
 
-export const router = createBrowserRouter([
-  {
-    path: ROUTES.HOME,
-    element: <MainLayout isHeaderVisible />,
-    children: [
-      {
-        path: ROUTES.HOME,
-        element: <HomePage />,
-      },
-      {
-        path: ROUTES.PRODUCT,
-        element: <ProductPage />,
-      },
-      {
-        path: ROUTES.CART,
-        element: <CartPage />,
-      },
-      {
-        path: ROUTES.HISTORY,
-        element: <HistoryPage />,
-      },
-      {
-        path: ROUTES.SEARCH,
-        element: <SearchPage />,
-      },
-    ],
-  },
+const routes = createRoutesFromElements(
+  <>
+    <Route path={ROUTES.HOME} element={<MainLayout isHeaderVisible />}>
+      <Route path={ROUTES.HOME} element={<HomePage />} />
+      <Route path={ROUTES.PRODUCT} element={<ProductPage />} />
+      <Route path={ROUTES.CART} element={<CartPage />} />
+      <Route path={ROUTES.HISTORY} element={<HistoryPage />} />
+      <Route path={ROUTES.SEARCH} element={<SearchPage />} />
+    </Route>
 
-  {
-    path: ROUTES.AUTH,
-    element: <MainLayout />,
-    children: [
-      {
-        path: ROUTES.LOGIN,
-        element: <LoginPage />,
-      },
-      {
-        path: ROUTES.REGISTER,
-        element: <RegisterPage />,
-      },
-    ],
-  },
-])
+    <Route path={ROUTES.AUTH} element={<MainLayout />}>
+      <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+      <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+    </Route>
+  </>,
+)
+
+export const router = createHashRouter(routes)
