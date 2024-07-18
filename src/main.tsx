@@ -11,6 +11,7 @@ import { store } from '@/store'
 import '@/config/firebase'
 
 import './global.css'
+import { Toaster } from 'react-hot-toast'
 
 createRoot(document.querySelector('#root')!).render(
   <StrictMode>
@@ -18,6 +19,7 @@ createRoot(document.querySelector('#root')!).render(
       <ThemeProvider>
         <Provider store={store}>
           <RouterProvider router={router} />
+          <Toaster />
         </Provider>
       </ThemeProvider>
     </ErrorBoundary>

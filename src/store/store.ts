@@ -5,6 +5,7 @@ import { productApi } from '@/services/productsService'
 import { userSlice } from '@/store/userSlice'
 import { cartSlice } from '@/store/cartSlice'
 import { historySlice } from '@/store/historySlice'
+import { authMiddleware } from '@store/middlewares'
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +16,9 @@ export const store = configureStore({
   },
 
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(productApi.middleware),
+    getDefaultMiddleware()
+      .concat(productApi.middleware)
+      .concat(authMiddleware.middleware),
 })
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
