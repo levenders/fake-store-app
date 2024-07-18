@@ -1,11 +1,15 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 
 import { useSelector } from 'react-redux'
 
 import { Button, Headling, Loader } from '@/components'
 import { useCartItems } from '@/hooks/useCartItems'
 import { useAppDispatch } from '@/store'
-import { cartSelector, clearCart } from '@/store/cartSlice'
+import {
+  cartLoadingStatusSelector,
+  cartSelector,
+  clearCart,
+} from '@/store/cartSlice'
 import type { CartItem } from '@/types/cart'
 
 import s from './CartPage.module.css'
@@ -15,15 +19,24 @@ const LazyCartProduct = lazy(() =>
 )
 
 export const CartPage = () => {
+  const [loadingOrder, setLoadingOrder] = useState(false)
+
   const cart = useSelector(cartSelector)
+  const loadingStatus = useSelector(cartLoadingStatusSelector)
   const dispatch = useAppDispatch()
+
   const { cartItems } = useCartItems()
 
   const handleClick = () => {
+    setLoadingOrder(true)
     dispatch(clearCart())
-    alert('Заказ оформлен')
-    //заглушка
   }
+
+  useEffect(() => {
+    if (loadingStatus === 'idle') {
+      setLoadingOrder(false)
+    }
+  }, [loadingStatus])
 
   if (!cartItems) {
     return (
@@ -31,6 +44,10 @@ export const CartPage = () => {
         <Headling> Корзина пока что пустая ...</Headling>
       </div>
     )
+  }
+
+  if (loadingStatus === 'loading' && loadingOrder) {
+    return <Loader />
   }
 
   return (

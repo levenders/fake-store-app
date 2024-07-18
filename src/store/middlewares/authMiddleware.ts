@@ -9,7 +9,7 @@ export const authMiddleware = createListenerMiddleware()
 authMiddleware.startListening({
   actionCreator: loginUser.rejected,
   effect: action => {
-    const errorMessage = action.payload || 'Проищошла неизвестная ошибка'
+    const errorMessage = action.payload || 'Произошла неизвестная ошибка'
     toast.error(` Ошибка входа: ${errorMessage}`)
   },
 })
@@ -17,7 +17,7 @@ authMiddleware.startListening({
 authMiddleware.startListening({
   actionCreator: registerUser.rejected,
   effect: action => {
-    const errorMessage = action.payload || 'Проищошла неизвестная ошибка'
+    const errorMessage = action.payload || 'Произошла неизвестная ошибка'
     toast.error(`Ошибка регистрации: ${errorMessage}`)
   },
 })
