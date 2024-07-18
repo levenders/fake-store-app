@@ -21,6 +21,17 @@ const initialState: CartState = {
   errorMessage: null,
 }
 
+const updateItemLoadingState = (
+  state: CartState,
+  itemId: number,
+  isLoading: boolean,
+) => {
+  const item = state.cart.find(item => item.id === itemId)
+  if (item) {
+    item.isLoading = isLoading
+  }
+}
+
 type State = typeof initialState
 
 interface RootState {
@@ -33,9 +44,10 @@ export const cartSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(addToCart.pending, state => {
+      .addCase(addToCart.pending, (state, action) => {
         state.loadingStatus = 'loading'
         state.errorMessage = null
+        updateItemLoadingState(state, action.meta.arg.id, true)
       })
       .addCase(addToCart.fulfilled, (state, action) => {
         state.loadingStatus = 'idle'
@@ -44,13 +56,15 @@ export const cartSlice = createSlice({
         )
         if (existingItem) {
           existingItem.count += action.payload.count
+          existingItem.isLoading = false
         } else {
-          state.cart.push(action.payload)
+          state.cart.push({ ...action.payload, isLoading: false })
         }
       })
       .addCase(addToCart.rejected, (state, action) => {
         state.loadingStatus = 'error'
         state.errorMessage = action.error.message || 'Неизвестная ошибка'
+        updateItemLoadingState(state, action.meta.arg.id, false)
       })
       .addCase(getCart.pending, state => {
         state.loadingStatus = 'loading'
@@ -64,9 +78,10 @@ export const cartSlice = createSlice({
         state.loadingStatus = 'error'
         state.errorMessage = action.error.message || 'Неизвестная ошибка'
       })
-      .addCase(decrementCartItem.pending, state => {
+      .addCase(decrementCartItem.pending, (state, action) => {
         state.loadingStatus = 'loading'
         state.errorMessage = null
+        updateItemLoadingState(state, action.meta.arg, true)
       })
       .addCase(decrementCartItem.fulfilled, (state, action) => {
         state.loadingStatus = 'idle'
@@ -81,15 +96,18 @@ export const cartSlice = createSlice({
           } else {
             existingItem.count = action.payload.count
           }
+          existingItem.isLoading = false
         }
       })
       .addCase(decrementCartItem.rejected, (state, action) => {
         state.loadingStatus = 'error'
         state.errorMessage = action.error.message || 'Неизвестная ошибка'
+        updateItemLoadingState(state, action.meta.arg, false)
       })
-      .addCase(removeCartItem.pending, state => {
+      .addCase(removeCartItem.pending, (state, action) => {
         state.loadingStatus = 'loading'
         state.errorMessage = null
+        updateItemLoadingState(state, action.meta.arg, true)
       })
       .addCase(removeCartItem.fulfilled, (state, action) => {
         state.loadingStatus = 'idle'
@@ -98,10 +116,14 @@ export const cartSlice = createSlice({
       .addCase(removeCartItem.rejected, (state, action) => {
         state.loadingStatus = 'error'
         state.errorMessage = action.error.message || 'Неизвестная ошибка'
+        updateItemLoadingState(state, action.meta.arg, false)
       })
       .addCase(clearCart.pending, state => {
         state.loadingStatus = 'loading'
         state.errorMessage = null
+        state.cart.forEach(item => {
+          item.isLoading = true
+        })
       })
       .addCase(clearCart.fulfilled, state => {
         state.loadingStatus = 'idle'
@@ -110,6 +132,9 @@ export const cartSlice = createSlice({
       .addCase(clearCart.rejected, (state, action) => {
         state.loadingStatus = 'error'
         state.errorMessage = action.error.message || 'Неизвестная ошибка'
+        state.cart.forEach(item => {
+          item.isLoading = false
+        })
       })
   },
 })
@@ -118,3 +143,8 @@ export const cartSelector = (state: RootState) => state.cartSlice.cart
 
 export const cartLoadingStatusSelector = (state: RootState) =>
   state.cartSlice.loadingStatus
+
+export const cartItemLoadingSelector = (id: number) => (state: RootState) => {
+  const item = state.cartSlice.cart.find(item => item.id === id)
+  return item ? item.isLoading : false
+}

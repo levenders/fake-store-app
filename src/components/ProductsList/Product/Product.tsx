@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
 
-import { Button, CounterButton } from '@/components'
+import { Button, CounterButton, Loader } from '@/components'
 import { useAppDispatch } from '@/store'
 import { addToCart } from '@/store/cartSlice'
 import { useCartItems } from '@/hooks/useCartItems'
@@ -21,10 +21,10 @@ export const Product = ({ product }: ProductProps) => {
   const { isTheme } = useTheme()
   const fullPrice = getPriceUsd(price)
   const dispach = useAppDispatch()
-  const { countById } = useCartItems(id)
+  const { countById, isCartItemLoading } = useCartItems(id)
 
   const handleClick = () => {
-    dispach(addToCart({ id, count: 1 }))
+    dispach(addToCart({ id, count: 1, isLoading: isCartItemLoading }))
   }
 
   return (
@@ -39,13 +39,17 @@ export const Product = ({ product }: ProductProps) => {
         <img alt={title} src={image} className={s.image} />
         <div className={s.price}>{fullPrice}</div>
       </Link>
-      {countById > 0 ? (
-        <CounterButton id={id} />
-      ) : (
-        <Button className={s.button} onClick={handleClick}>
-          Купить
-        </Button>
-      )}
+      <Loader size="small" when={isCartItemLoading}>
+        <>
+          {countById > 0 ? (
+            <CounterButton id={id} />
+          ) : (
+            <Button className={s.button} onClick={handleClick}>
+              Купить
+            </Button>
+          )}
+        </>
+      </Loader>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Button, Product } from '@/components'
+import { Button, Loader, Product } from '@/components'
 
 import { productApi } from '@/services/productsService'
 
@@ -10,7 +10,11 @@ export const ProductsList = () => {
   const [limit, setLimit] = useState<number>(5)
   const [visibilityButton, setvisibilityButton] = useState<boolean>(true)
 
-  const { data: products, error } = productApi.useGetAllProductsQuery(limit)
+  const {
+    data: products,
+    error,
+    isLoading,
+  } = productApi.useGetAllProductsQuery(limit)
 
   const handlerClick = () => {
     setLimit(prevLimit => prevLimit + 5)
@@ -28,20 +32,22 @@ export const ProductsList = () => {
       {error && (
         <h3 className={s.error}>Произошла ошибка. Перезагрузите страницу</h3>
       )}
-      {products && (
-        <div className={s.container}>
-          <div className={s.list}>
-            {products.map(p => (
-              <Product key={p.id} product={p} />
-            ))}
+      <Loader when={isLoading}>
+        {products && (
+          <div className={s.container}>
+            <div className={s.list}>
+              {products.map(p => (
+                <Product key={p.id} product={p} />
+              ))}
+            </div>
+            {visibilityButton && (
+              <Button className={s.button} onClick={handlerClick}>
+                Еще?
+              </Button>
+            )}
           </div>
-          {visibilityButton && (
-            <Button className={s.button} onClick={handlerClick}>
-              Еще?
-            </Button>
-          )}
-        </div>
-      )}
+        )}
+      </Loader>
     </>
   )
 }

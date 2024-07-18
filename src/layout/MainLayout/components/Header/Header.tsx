@@ -35,30 +35,20 @@ export const Header = memo(function Header() {
       </Link>
       <Search />
       <Link to={ROUTES.HISTORY} className={cn(s.link, s.button)}>
-        {isHistoryLoading ? (
-          <>
-            <span className={cn(s.icon, s.historyIcon)} />
-            <Loader size="small" />
-          </>
-        ) : (
-          <>
-            <span className={cn(s.icon, s.historyIcon)} />
-            <span className={s.counter}>{historyItems}</span>
-          </>
-        )}
+        <span className={cn(s.icon, s.historyIcon)} />
+        <span className={s.counter}>
+          <Loader when={isHistoryLoading} size="small">
+            {historyItems}
+          </Loader>
+        </span>
       </Link>
       <Link to={ROUTES.CART} className={cn(s.link, s.button)}>
-        {isCartLoading ? (
-          <>
-            <span className={cn(s.icon, s.cartIcon)} />
-            <Loader size="small" />
-          </>
-        ) : (
-          <>
-            <span className={cn(s.icon, s.cartIcon)} />
-            <span className={s.counter}>{cartItems}</span>
-          </>
-        )}
+        <span className={cn(s.icon, s.cartIcon)} />
+        <span className={s.counter}>
+          <Loader when={isCartLoading} size="small">
+            {cartItems}
+          </Loader>
+        </span>
       </Link>
       <Button className={s.button} onClick={toggleTheme}>
         <span

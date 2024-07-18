@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 
 import { useAppDispatch } from '@/store'
 import {
+  cartItemLoadingSelector,
   cartLoadingStatusSelector,
   cartSelector,
   getCart,
@@ -13,6 +14,7 @@ export const useCartItems = (id?: number) => {
   const cartLoadingStatus = useSelector(cartLoadingStatusSelector)
   const dispatch = useAppDispatch()
   const cart = useSelector(cartSelector)
+  const isCartItemLoading = useSelector(cartItemLoadingSelector(id as number))
 
   const [isCartLodingStatus, setIsCartLodingStatus] = useState(false)
 
@@ -40,5 +42,6 @@ export const useCartItems = (id?: number) => {
     cartItems: cart.length,
     countById: getItemCountById(id),
     isCartLoading: isCartLodingStatus,
+    isCartItemLoading,
   }
 }
