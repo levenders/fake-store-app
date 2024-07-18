@@ -3,7 +3,7 @@ import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import cn from 'classnames'
 
-import { Button, Search } from '@/components'
+import { Button, Loader, Search } from '@/components'
 import { useAppDispatch } from '@/store'
 import { useCartItems } from '@/hooks/useCartItems'
 import { useHistoryItems } from '@/hooks/useHistoryItems'
@@ -16,8 +16,8 @@ import s from './Header.module.css'
 export const Header = memo(function Header() {
   const dispatch = useAppDispatch()
   const { isTheme, toggleTheme } = useTheme()
-  const { cartItems } = useCartItems()
-  const { historyItems } = useHistoryItems()
+  const { cartItems, isCartLoading } = useCartItems()
+  const { historyItems, isHistoryLoading } = useHistoryItems()
 
   const handleLogout = () => {
     dispatch(logoutUser())
@@ -35,12 +35,30 @@ export const Header = memo(function Header() {
       </Link>
       <Search />
       <Link to={ROUTES.HISTORY} className={cn(s.link, s.button)}>
-        <span className={cn(s.icon, s.historyIcon)} />
-        <span className={s.counter}>{historyItems}</span>
+        {isHistoryLoading ? (
+          <>
+            <span className={cn(s.icon, s.historyIcon)} />
+            <Loader size="small" />
+          </>
+        ) : (
+          <>
+            <span className={cn(s.icon, s.historyIcon)} />
+            <span className={s.counter}>{historyItems}</span>
+          </>
+        )}
       </Link>
       <Link to={ROUTES.CART} className={cn(s.link, s.button)}>
-        <span className={cn(s.icon, s.cartIcon)} />
-        <span className={s.counter}>{cartItems}</span>
+        {isCartLoading ? (
+          <>
+            <span className={cn(s.icon, s.cartIcon)} />
+            <Loader size="small" />
+          </>
+        ) : (
+          <>
+            <span className={cn(s.icon, s.cartIcon)} />
+            <span className={s.counter}>{cartItems}</span>
+          </>
+        )}
       </Link>
       <Button className={s.button} onClick={toggleTheme}>
         <span
