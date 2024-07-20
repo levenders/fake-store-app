@@ -51,11 +51,14 @@ export const Search = () => {
     }
   }
 
-  useEffect(() => {
-    if (debounceValue) {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value)
+    if (e.target.value.trim()) {
       setIsOpen(true)
+    } else {
+      setIsOpen(false)
     }
-  }, [debounceValue])
+  }
 
   useEffect(() => {
     const handleDocumentClick = (event: MouseEvent) => {
@@ -80,7 +83,7 @@ export const Search = () => {
         className={s.input}
         value={inputValue}
         onFocus={handleInputFocus}
-        onChange={e => setInputValue(e.target.value)}
+        onChange={handleInputChange}
         onKeyDown={handleEnterPress}
       />
       {isOpen && (
