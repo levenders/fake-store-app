@@ -1,34 +1,10 @@
-import { useEffect, useState } from 'react'
-
 import { useSelector } from 'react-redux'
 
-import { useAppDispatch } from '@/store'
-import {
-  cartItemLoadingSelector,
-  cartLoadingStatusSelector,
-  cartSelector,
-  getCart,
-} from '@/store/cartSlice'
+import { cartItemLoadingSelector, cartSelector } from '@/store/cartSlice'
 
-export const useCartItems = (id?: number) => {
-  const cartLoadingStatus = useSelector(cartLoadingStatusSelector)
-  const dispatch = useAppDispatch()
+export const useCartItems = (id: number) => {
   const cart = useSelector(cartSelector)
-  const isCartItemLoading = useSelector(cartItemLoadingSelector(id as number))
-
-  const [isCartLodingStatus, setIsCartLodingStatus] = useState(false)
-
-  useEffect(() => {
-    dispatch(getCart())
-  }, [dispatch])
-
-  useEffect(() => {
-    if (cartLoadingStatus === 'loading') {
-      setIsCartLodingStatus(true)
-    } else {
-      setIsCartLodingStatus(false)
-    }
-  }, [cartLoadingStatus])
+  const isCartItemLoading = useSelector(cartItemLoadingSelector(id))
 
   const getItemCountById = (id: number | undefined): number => {
     if (id === undefined) {
@@ -39,9 +15,7 @@ export const useCartItems = (id?: number) => {
   }
 
   return {
-    cartItems: cart.length,
     countById: getItemCountById(id),
-    isCartLoading: isCartLodingStatus,
-    isCartItemLoading,
+    isCartLoadingById: isCartItemLoading,
   }
 }

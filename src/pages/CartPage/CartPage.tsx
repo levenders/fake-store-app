@@ -1,15 +1,11 @@
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { lazy, Suspense } from 'react'
 
 import { useSelector } from 'react-redux'
 
 import { Button, Headling, Loader } from '@/components'
-import { useCartItems } from '@/hooks/useCartItems'
+import { useCart } from '@/hooks/useCart'
 import { useAppDispatch } from '@/store'
-import {
-  cartLoadingStatusSelector,
-  cartSelector,
-  clearCart,
-} from '@/store/cartSlice'
+import { cartSelector, clearCart } from '@/store/cartSlice'
 import type { CartItem } from '@/types/cart'
 
 import s from './CartPage.module.css'
@@ -19,26 +15,16 @@ const LazyCartProduct = lazy(() =>
 )
 
 export const CartPage = () => {
-  const [loadingOrder, setLoadingOrder] = useState(false)
-
   const cart = useSelector(cartSelector)
-  const loadingStatus = useSelector(cartLoadingStatusSelector)
   const dispatch = useAppDispatch()
 
-  const { cartItems } = useCartItems()
+  const { cartItemsCount, isCartLoading } = useCart()
 
   const handleClick = () => {
-    setLoadingOrder(true)
     dispatch(clearCart())
   }
 
-  useEffect(() => {
-    if (loadingStatus === 'idle') {
-      setLoadingOrder(false)
-    }
-  }, [loadingStatus])
-
-  if (!cartItems) {
+  if (!cartItemsCount) {
     return (
       <div className={s.container}>
         <Headling> Корзина пока что пустая ...</Headling>
@@ -46,21 +32,19 @@ export const CartPage = () => {
     )
   }
 
-  if (loadingStatus === 'loading' && loadingOrder) {
-    return <Loader />
-  }
-
   return (
-    <div className={s.container}>
-      <Headling>Корзина</Headling>
-      <Button onClick={handleClick}>Оформить заказ</Button>
-      <Suspense fallback={<Loader />}>
-        <div>
-          {cart.map((item: CartItem) => (
-            <LazyCartProduct key={item.id} id={item.id} />
-          ))}
-        </div>
-      </Suspense>
-    </div>
+    <Loader when={isCartLoading}>
+      <div className={s.container}>
+        <Headling>Корзина</Headling>
+        <Button onClick={handleClick}>Оформить заказ</Button>
+        <Suspense fallback={<Loader />}>
+          <div>
+            {cart.map((item: CartItem) => (
+              <LazyCartProduct key={item.id} id={item.id} />
+            ))}
+          </div>
+        </Suspense>
+      </div>
+    </Loader>
   )
 }

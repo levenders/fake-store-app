@@ -21,10 +21,10 @@ export const Product = ({ product }: ProductProps) => {
   const { isTheme } = useTheme()
   const fullPrice = getPriceUsd(price)
   const dispach = useAppDispatch()
-  const { countById, isCartItemLoading } = useCartItems(id)
+  const { countById, isCartLoadingById } = useCartItems(id)
 
   const handleClick = () => {
-    dispach(addToCart({ id, count: 1, isLoading: isCartItemLoading }))
+    dispach(addToCart({ id, count: 1, isLoading: isCartLoadingById }))
   }
 
   return (
@@ -39,7 +39,7 @@ export const Product = ({ product }: ProductProps) => {
         <img alt={title} src={image} className={s.image} />
         <div className={s.price}>{fullPrice}</div>
       </Link>
-      <Loader size="small" when={isCartItemLoading}>
+      <Loader size="small" when={isCartLoadingById}>
         {countById > 0 ? (
           <CounterButton id={id} />
         ) : (

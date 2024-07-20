@@ -18,12 +18,12 @@ export const ProductPage = () => {
   const { data: product, isLoading, error } = productApi.useGetProductQuery(id)
 
   const idAsNumber = Number(id) // необходимый фикс из-за возвращаемого типа от useParams
-  const { countById, isCartItemLoading } = useCartItems(idAsNumber)
+  const { countById, isCartLoadingById } = useCartItems(idAsNumber)
   const dispatch = useAppDispatch()
 
   const handleClick = () => {
     dispatch(
-      addToCart({ id: idAsNumber, count: 1, isLoading: isCartItemLoading }),
+      addToCart({ id: idAsNumber, count: 1, isLoading: isCartLoadingById }),
     )
   }
 
@@ -50,7 +50,7 @@ export const ProductPage = () => {
             <p>{product.description}</p>
             <div className={s.buyLine}>
               <p className={s.price}>{getPriceUsd(product.price)}</p>
-              <Loader when={isCartItemLoading} size="small">
+              <Loader when={isCartLoadingById}>
                 {countById > 0 ? (
                   <CounterButton id={idAsNumber} />
                 ) : (

@@ -5,7 +5,7 @@ import cn from 'classnames'
 
 import { Button, Loader, Search } from '@/components'
 import { useAppDispatch } from '@/store'
-import { useCartItems } from '@/hooks/useCartItems'
+import { useCart } from '@/hooks/useCart'
 import { useHistoryItems } from '@/hooks/useHistoryItems'
 import { logoutUser } from '@/store/userSlice/actionCreators'
 import { useTheme } from '@/context'
@@ -16,7 +16,7 @@ import s from './Header.module.css'
 export const Header = memo(function Header() {
   const dispatch = useAppDispatch()
   const { isTheme, toggleTheme } = useTheme()
-  const { cartItems, isCartLoading } = useCartItems()
+  const { cartItemsCount, isCartLoading } = useCart()
   const { historyItems, isHistoryLoading } = useHistoryItems()
 
   const handleLogout = () => {
@@ -46,7 +46,7 @@ export const Header = memo(function Header() {
         <span className={cn(s.icon, s.cartIcon)} />
         <span className={s.counter}>
           <Loader when={isCartLoading} size="small">
-            {cartItems}
+            {cartItemsCount}
           </Loader>
         </span>
       </Link>

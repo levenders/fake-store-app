@@ -11,14 +11,14 @@ interface CounterButtonProps {
 
 export const CounterButton = ({ id }: CounterButtonProps) => {
   const { countById } = useCartItems(id)
-  const { isCartItemLoading } = useCartItems(id)
+  const { isCartLoadingById } = useCartItems(id)
   const dispatch = useAppDispatch()
 
   const handleDecrementClick = () => {
     dispatch(decrementCartItem(id))
   }
   const handleIncrementClick = () => {
-    dispatch(addToCart({ id: id, count: 1, isLoading: isCartItemLoading }))
+    dispatch(addToCart({ id: id, count: 1, isLoading: isCartLoadingById }))
   }
 
   const handleRemoveClick = () => {
@@ -26,7 +26,7 @@ export const CounterButton = ({ id }: CounterButtonProps) => {
   }
 
   return (
-    <Loader when={isCartItemLoading}>
+    <Loader when={isCartLoadingById}>
       <div className={s.container}>
         <Button onClick={handleDecrementClick}>-</Button>
         <p className={s.counter}>{countById}</p>
