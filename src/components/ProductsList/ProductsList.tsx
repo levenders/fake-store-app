@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
 import { Button, Loader, Product } from '@/components'
-
 import { productApi } from '@/services/productsService'
 
 import s from './ProductsList.module.css'
@@ -28,26 +27,24 @@ export const ProductsList = () => {
   }, [limit])
 
   return (
-    <>
+    <Loader when={isLoading}>
       {error && (
         <h3 className={s.error}>Произошла ошибка. Перезагрузите страницу</h3>
       )}
-      <Loader when={isLoading}>
-        {products && (
-          <div className={s.container}>
-            <div className={s.list}>
-              {products.map(p => (
-                <Product key={p.id} product={p} />
-              ))}
-            </div>
-            {visibilityButton && (
-              <Button className={s.button} onClick={handlerClick}>
-                Еще?
-              </Button>
-            )}
+      {products && (
+        <div className={s.container}>
+          <div className={s.list}>
+            {products.map(p => (
+              <Product key={p.id} product={p} />
+            ))}
           </div>
-        )}
-      </Loader>
-    </>
+          {visibilityButton && (
+            <Button className={s.button} onClick={handlerClick}>
+              Еще?
+            </Button>
+          )}
+        </div>
+      )}
+    </Loader>
   )
 }

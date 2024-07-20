@@ -14,8 +14,10 @@ import { ROUTES } from '@/constants/routes'
 import s from './Header.module.css'
 
 export const Header = memo(function Header() {
-  const dispatch = useAppDispatch()
   const { isTheme, toggleTheme } = useTheme()
+
+  const dispatch = useAppDispatch()
+
   const { cartItemsCount, isCartLoading } = useCart()
   const { historyItems, isHistoryLoading } = useHistoryItems()
 

@@ -14,6 +14,7 @@ interface HistoryItemProps {
 
 export const HistoryItem = ({ query }: HistoryItemProps) => {
   const dispatch = useAppDispatch()
+
   const { isTheme } = useTheme()
 
   const handleClick = () => {

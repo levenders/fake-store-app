@@ -1,4 +1,5 @@
-import { memo, type ReactNode } from 'react'
+import { memo } from 'react'
+import type { ReactNode } from 'react'
 
 import cn from 'classnames'
 

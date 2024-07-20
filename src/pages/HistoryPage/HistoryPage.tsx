@@ -13,6 +13,7 @@ const LazyHistoryItem = lazy(() =>
 
 export const HistoryPage = () => {
   const { history, historyItems } = useHistoryItems()
+
   const dispatch = useAppDispatch()
 
   const handleClick = () => {

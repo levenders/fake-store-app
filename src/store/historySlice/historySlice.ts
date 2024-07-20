@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import type { LoadingStatus } from '@/types'
 import {
   addToHistory,
   clearHistory,
   getHistory,
   removeHistoryItem,
-} from './actionCreators'
+} from '@/store/historySlice'
+
+import type { LoadingStatus } from '@/types'
 
 type historyState = {
   history: string[]

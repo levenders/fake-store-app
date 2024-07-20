@@ -16,6 +16,7 @@ const LazyCartProduct = lazy(() =>
 
 export const CartPage = () => {
   const cart = useSelector(cartSelector)
+
   const dispatch = useAppDispatch()
 
   const { cartItemsCount, isCartLoading } = useCart()

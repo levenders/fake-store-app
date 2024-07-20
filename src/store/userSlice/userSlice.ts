@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
+
 import {
   checkAuthState,
   loginUser,
   logoutUser,
   registerUser,
-} from './actionCreators'
+} from '@store/userSlice'
+
 import type { LoadingStatus, User } from '@/types'
 
 type UserState = {

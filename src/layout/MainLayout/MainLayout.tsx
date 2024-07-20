@@ -4,8 +4,7 @@ import { useSelector } from 'react-redux'
 import { Loader } from '@/components'
 import { useAuth } from '@/hooks/useAuth'
 import { userLoadingStatusSelector } from '@/store/userSlice'
-
-import { Header } from './components/Header'
+import { Header } from '@/layout/MainLayout/components'
 import { ROUTES } from '@/constants/routes'
 
 interface Props {
@@ -14,8 +13,11 @@ interface Props {
 
 export const MainLayout = ({ isHeaderVisible = false }: Props) => {
   const { pathname } = useLocation()
+
   const loadingStatus = useSelector(userLoadingStatusSelector)
+
   const { isAuth } = useAuth()
+
   const isAuthPage = pathname === ROUTES.LOGIN || pathname === ROUTES.REGISTER
 
   if (loadingStatus === 'loading') return <Loader />

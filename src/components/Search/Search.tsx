@@ -14,9 +14,11 @@ import s from './Search.module.css'
 export const Search = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [inputValue, setInputValue] = useState('')
+
   const ref = useRef<HTMLDivElement | null>(null)
 
   const dispatch = useAppDispatch()
+
   const navigate = useNavigate()
 
   const debounceValue = useDebounce(inputValue)

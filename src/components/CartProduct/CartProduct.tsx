@@ -1,4 +1,5 @@
 import cn from 'classnames'
+import { Link } from 'react-router-dom'
 
 import { CounterButton, Loader } from '@/components'
 import { useGetProductQuery } from '@/services/productsService'
@@ -6,13 +7,14 @@ import { getPriceUsd } from '@/helpers/getPrice'
 import { useTheme } from '@/context'
 
 import s from './CartProduct.module.css'
-import { Link } from 'react-router-dom'
 
 interface CartItemProps {
   id: number
 }
+
 export const CartProduct = ({ id }: CartItemProps) => {
   const { data: product, error, isLoading } = useGetProductQuery(String(id))
+
   const { isTheme } = useTheme()
 
   return (

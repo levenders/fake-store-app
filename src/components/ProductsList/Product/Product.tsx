@@ -18,10 +18,14 @@ interface ProductProps {
 
 export const Product = ({ product }: ProductProps) => {
   const { id, title, image, price } = product
+
   const { isTheme } = useTheme()
-  const fullPrice = getPriceUsd(price)
+
   const dispach = useAppDispatch()
+
   const { countById, isCartLoadingById } = useCartItems(id)
+
+  const fullPrice = getPriceUsd(price)
 
   const handleClick = () => {
     dispach(addToCart({ id, count: 1, isLoading: isCartLoadingById }))

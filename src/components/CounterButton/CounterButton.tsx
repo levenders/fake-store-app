@@ -12,13 +12,15 @@ interface CounterButtonProps {
 export const CounterButton = ({ id }: CounterButtonProps) => {
   const { countById } = useCartItems(id)
   const { isCartLoadingById } = useCartItems(id)
+
   const dispatch = useAppDispatch()
 
   const handleDecrementClick = () => {
     dispatch(decrementCartItem(id))
   }
+
   const handleIncrementClick = () => {
-    dispatch(addToCart({ id: id, count: 1, isLoading: isCartLoadingById }))
+    dispatch(addToCart({ id: id, count: 1 }))
   }
 
   const handleRemoveClick = () => {

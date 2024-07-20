@@ -1,5 +1,8 @@
-import { createRoutesFromElements, Route } from 'react-router-dom'
-import { createHashRouter } from 'react-router-dom'
+import {
+  createRoutesFromElements,
+  createHashRouter,
+  Route,
+} from 'react-router-dom'
 
 import {
   HomePage,

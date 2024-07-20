@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import type { CartItem, LoadingStatus } from '@/types'
 import {
   addToCart,
   clearCart,
   decrementCartItem,
   getCart,
   removeCartItem,
-} from './actionCreators'
+} from '@store/cartSlice'
+
+import type { CartItem, LoadingStatus } from '@/types'
 
 type CartState = {
   cart: CartItem[]

@@ -13,12 +13,17 @@ import s from './ProductPage.module.css'
 
 export const ProductPage = () => {
   const navigate = useNavigate()
+
   const { isTheme } = useTheme()
+
   const { id } = useParams()
+
   const { data: product, isLoading, error } = productApi.useGetProductQuery(id)
 
   const idAsNumber = Number(id) // необходимый фикс из-за возвращаемого типа от useParams
+
   const { countById, isCartLoadingById } = useCartItems(idAsNumber)
+
   const dispatch = useAppDispatch()
 
   const handleClick = () => {

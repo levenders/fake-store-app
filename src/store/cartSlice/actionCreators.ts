@@ -3,6 +3,7 @@ import { arrayUnion, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 
 import { getCartRef } from '@/helpers/getRef'
 import { getCurrentUser } from '@/helpers/getCurrentUser'
+
 import type { CartItem } from '@/types/cart'
 
 export const addToCart = createAsyncThunk(
