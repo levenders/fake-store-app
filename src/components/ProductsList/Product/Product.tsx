@@ -40,15 +40,13 @@ export const Product = ({ product }: ProductProps) => {
         <div className={s.price}>{fullPrice}</div>
       </Link>
       <Loader size="small" when={isCartItemLoading}>
-        <>
-          {countById > 0 ? (
-            <CounterButton id={id} />
-          ) : (
-            <Button className={s.button} onClick={handleClick}>
-              Купить
-            </Button>
-          )}
-        </>
+        {countById > 0 ? (
+          <CounterButton id={id} />
+        ) : (
+          <Button className={s.button} onClick={handleClick}>
+            Купить
+          </Button>
+        )}
       </Loader>
     </div>
   )
