@@ -29,8 +29,7 @@ export const SearchPage = () => {
   }
 
   return (
-    <>
-      {isLoading && <Loader />}
+    <Loader when={isLoading}>
       {error && (
         <h3 className={s.error}>Произошла ошибка. Перезагрузите страницу</h3>
       )}
@@ -46,6 +45,6 @@ export const SearchPage = () => {
           </div>
         </div>
       )}
-    </>
+    </Loader>
   )
 }

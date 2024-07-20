@@ -1,4 +1,9 @@
-export { cartSlice, cartSelector, cartLoadingStatusSelector } from './cartSlice'
+export {
+  cartSlice,
+  cartSelector,
+  cartLoadingStatusSelector,
+  cartItemLoadingSelector,
+} from './cartSlice'
 export {
   addToCart,
   getCart,

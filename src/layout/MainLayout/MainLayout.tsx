@@ -31,7 +31,6 @@ export const MainLayout = ({ isHeaderVisible = false }: Props) => {
   return (
     <>
       {isHeaderVisible && <Header />}
-
       <Outlet />
     </>
   )

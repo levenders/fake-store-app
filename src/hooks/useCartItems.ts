@@ -1,17 +1,10 @@
-import { useEffect } from 'react'
-
 import { useSelector } from 'react-redux'
 
-import { useAppDispatch } from '@/store'
-import { cartSelector, getCart } from '@/store/cartSlice'
+import { cartItemLoadingSelector, cartSelector } from '@/store/cartSlice'
 
-export const useCartItems = (id?: number) => {
-  const dispatch = useAppDispatch()
+export const useCartItems = (id: number) => {
   const cart = useSelector(cartSelector)
-
-  useEffect(() => {
-    dispatch(getCart())
-  }, [dispatch])
+  const isCartItemLoading = useSelector(cartItemLoadingSelector(id))
 
   const getItemCountById = (id: number | undefined): number => {
     if (id === undefined) {
@@ -22,7 +15,7 @@ export const useCartItems = (id?: number) => {
   }
 
   return {
-    cartItems: cart.length,
     countById: getItemCountById(id),
+    isCartLoadingById: isCartItemLoading,
   }
 }

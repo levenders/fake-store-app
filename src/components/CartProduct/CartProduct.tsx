@@ -16,8 +16,7 @@ export const CartProduct = ({ id }: CartItemProps) => {
   const { isTheme } = useTheme()
 
   return (
-    <>
-      {isLoading && <Loader />}
+    <Loader when={isLoading}>
       {error && <h3>Произошла ошибка. Перезагрузите страницу</h3>}
       {product && (
         <>
@@ -45,6 +44,6 @@ export const CartProduct = ({ id }: CartItemProps) => {
           </div>
         </>
       )}
-    </>
+    </Loader>
   )
 }

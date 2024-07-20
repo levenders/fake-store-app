@@ -18,16 +18,17 @@ export const ProductPage = () => {
   const { data: product, isLoading, error } = productApi.useGetProductQuery(id)
 
   const idAsNumber = Number(id) // необходимый фикс из-за возвращаемого типа от useParams
-  const { countById } = useCartItems(idAsNumber)
+  const { countById, isCartLoadingById } = useCartItems(idAsNumber)
   const dispatch = useAppDispatch()
 
   const handleClick = () => {
-    dispatch(addToCart({ id: idAsNumber, count: 1 }))
+    dispatch(
+      addToCart({ id: idAsNumber, count: 1, isLoading: isCartLoadingById }),
+    )
   }
 
   return (
-    <>
-      {isLoading && <Loader />}
+    <Loader when={isLoading}>
       {error && (
         <h3 className={s.error}>Произошла ошибка. Перезагрузите страницу</h3>
       )}
@@ -49,17 +50,19 @@ export const ProductPage = () => {
             <p>{product.description}</p>
             <div className={s.buyLine}>
               <p className={s.price}>{getPriceUsd(product.price)}</p>
-              {countById > 0 ? (
-                <CounterButton id={idAsNumber} />
-              ) : (
-                <Button className={s.button} onClick={handleClick}>
-                  Купить
-                </Button>
-              )}
+              <Loader when={isCartLoadingById}>
+                {countById > 0 ? (
+                  <CounterButton id={idAsNumber} />
+                ) : (
+                  <Button className={s.button} onClick={handleClick}>
+                    Купить
+                  </Button>
+                )}
+              </Loader>
             </div>
           </div>
         </div>
       )}
-    </>
+    </Loader>
   )
 }
