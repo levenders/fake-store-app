@@ -19,7 +19,7 @@ export const CartPage = () => {
 
   const dispatch = useAppDispatch()
 
-  const { cartItemsCount, isCartLoading } = useCart()
+  const { cartItemsCount } = useCart()
 
   const handleClick = () => {
     dispatch(clearCart())
@@ -34,18 +34,16 @@ export const CartPage = () => {
   }
 
   return (
-    <Loader when={isCartLoading}>
-      <div className={s.container}>
-        <Headling>Корзина</Headling>
-        <Button onClick={handleClick}>Оформить заказ</Button>
-        <Suspense fallback={<Loader />}>
-          <div>
-            {cart.map((item: CartItem) => (
-              <LazyCartProduct key={item.id} id={item.id} />
-            ))}
-          </div>
-        </Suspense>
-      </div>
-    </Loader>
+    <div className={s.container}>
+      <Headling>Корзина</Headling>
+      <Button onClick={handleClick}>Оформить заказ</Button>
+      <Suspense fallback={<Loader />}>
+        <div>
+          {cart.map((item: CartItem) => (
+            <LazyCartProduct key={item.id} id={item.id} />
+          ))}
+        </div>
+      </Suspense>
+    </div>
   )
 }
