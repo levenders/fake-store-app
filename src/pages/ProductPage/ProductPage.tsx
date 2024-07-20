@@ -7,6 +7,7 @@ import { useAppDispatch } from '@/store'
 import { addToCart } from '@/store/cartSlice'
 import { getPriceUsd } from '@/helpers/getPrice'
 import { productApi } from '@/services/productsService'
+import { ROUTES } from '@/constants/routes'
 import { useTheme } from '@/context'
 
 import s from './ProductPage.module.css'
@@ -45,7 +46,7 @@ export const ProductPage = () => {
           })}
         >
           <div className={s.lside}>
-            <Button className={s.button} onClick={() => navigate(-1)}>
+            <Button className={s.button} onClick={() => navigate(ROUTES.HOME)}>
               Назад
             </Button>
             <img alt={product.title} src={product.image} className={s.image} />
