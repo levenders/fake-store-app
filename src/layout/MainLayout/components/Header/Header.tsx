@@ -1,6 +1,6 @@
 import { memo } from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import cn from 'classnames'
 
 import { Button, Loader, Search } from '@/components'
@@ -12,9 +12,15 @@ import { useTheme } from '@/context'
 import { ROUTES } from '@/constants/routes'
 
 import s from './Header.module.css'
+import { useSelector } from 'react-redux'
+import { userSelector } from '@/store/userSlice'
 
 export const Header = memo(function Header() {
   const { isTheme, toggleTheme } = useTheme()
+
+  const navigate = useNavigate()
+
+  const user = useSelector(userSelector)
 
   const dispatch = useAppDispatch()
 
@@ -23,6 +29,10 @@ export const Header = memo(function Header() {
 
   const handleLogout = () => {
     dispatch(logoutUser())
+  }
+
+  const handleLogin = () => {
+    navigate(ROUTES.LOGIN)
   }
 
   return (
@@ -60,9 +70,15 @@ export const Header = memo(function Header() {
           })}
         />
       </Button>
-      <Button className={s.button} onClick={handleLogout}>
-        Выйти
-      </Button>
+      {user ? (
+        <Button className={s.button} onClick={handleLogout}>
+          Выйти
+        </Button>
+      ) : (
+        <Button className={s.button} onClick={handleLogin}>
+          Войти
+        </Button>
+      )}
     </div>
   )
 })

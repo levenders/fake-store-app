@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import { useSelector } from 'react-redux'
 
@@ -14,19 +14,11 @@ export const useCart = () => {
   const cart = useSelector(cartSelector)
   const cartLoadingStatus = useSelector(cartLoadingStatusSelector)
 
-  const [isCartLodingStatus, setIsCartLodingStatus] = useState(false)
-
   useEffect(() => {
     dispatch(getCart())
   }, [dispatch])
 
-  useEffect(() => {
-    if (cartLoadingStatus === 'loading') {
-      setIsCartLodingStatus(true)
-    } else {
-      setIsCartLodingStatus(false)
-    }
-  }, [cartLoadingStatus])
+  const isCartLoading = cartLoadingStatus === 'loading'
 
-  return { cartItemsCount: cart.length, isCartLoading: isCartLodingStatus }
+  return { cartItemsCount: cart.length, isCartLoading }
 }

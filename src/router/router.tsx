@@ -14,11 +14,12 @@ import {
   SearchPage,
 } from '@/pages'
 import { MainLayout } from '@/layout/MainLayout'
+import { AuthLayout } from '@/layout/AuthLayout'
 import { ROUTES } from '@/constants/routes'
 
 const routes = createRoutesFromElements(
   <>
-    <Route path={ROUTES.HOME} element={<MainLayout isHeaderVisible />}>
+    <Route path={ROUTES.HOME} element={<MainLayout />}>
       <Route path={ROUTES.HOME} element={<HomePage />} />
       <Route path={ROUTES.PRODUCT} element={<ProductPage />} />
       <Route path={ROUTES.CART} element={<CartPage />} />
@@ -26,7 +27,7 @@ const routes = createRoutesFromElements(
       <Route path={ROUTES.SEARCH} element={<SearchPage />} />
     </Route>
 
-    <Route path={ROUTES.AUTH} element={<MainLayout />}>
+    <Route path={ROUTES.AUTH} element={<AuthLayout />}>
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
       <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
     </Route>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import { useSelector } from 'react-redux'
 
@@ -14,23 +14,15 @@ export const useHistoryItems = () => {
   const history = useSelector(historySelector)
   const historyLoadingStatus = useSelector(historyLoadingStatusSelector)
 
-  const [isHistoryLodingStatus, setIsHistoryLodingStatus] = useState(false)
-
   useEffect(() => {
     dispatch(getHistory())
   }, [dispatch])
 
-  useEffect(() => {
-    if (historyLoadingStatus === 'loading') {
-      setIsHistoryLodingStatus(true)
-    } else {
-      setIsHistoryLodingStatus(false)
-    }
-  }, [historyLoadingStatus])
+  const isHistoryLoading = historyLoadingStatus === 'loading'
 
   return {
     historyItems: history.length,
     history,
-    isHistoryLoading: isHistoryLodingStatus,
+    isHistoryLoading,
   }
 }
