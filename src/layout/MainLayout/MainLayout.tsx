@@ -1,38 +1,24 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-
 import { Loader } from '@/components'
 import { useAuth } from '@/hooks/useAuth'
-import { userLoadingStatusSelector } from '@/store/userSlice'
 import { Header } from '@/layout/MainLayout/components'
 import { ROUTES } from '@/constants/routes'
 
-interface Props {
-  isHeaderVisible?: boolean
-}
-
-export const MainLayout = ({ isHeaderVisible = false }: Props) => {
+export const MainLayout = () => {
   const { pathname } = useLocation()
 
-  const loadingStatus = useSelector(userLoadingStatusSelector)
+  const { isAuth, isLoading } = useAuth()
 
-  const { isAuth } = useAuth()
+  const isProtectedPage =
+    pathname === ROUTES.CART || pathname === ROUTES.HISTORY
 
-  const isAuthPage = pathname === ROUTES.LOGIN || pathname === ROUTES.REGISTER
+  if (isLoading) return <Loader />
 
-  if (loadingStatus === 'loading') return <Loader />
-
-  if (!isAuth && !isAuthPage) {
-    return <Navigate to={ROUTES.LOGIN} replace />
-  }
-
-  if (isAuth && isAuthPage) {
-    return <Navigate to={ROUTES.HOME} replace />
-  }
+  if (!isAuth && isProtectedPage) return <Navigate to={ROUTES.LOGIN} replace />
 
   return (
     <>
-      {isHeaderVisible && <Header />}
+      <Header />
       <Outlet />
     </>
   )

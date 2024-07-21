@@ -19,13 +19,13 @@ export const CartPage = () => {
 
   const dispatch = useAppDispatch()
 
-  const { cartItemsCount } = useCart()
+  const { cartItemsCount, isCartLoading } = useCart()
 
   const handleClick = () => {
     dispatch(clearCart())
   }
 
-  if (!cartItemsCount) {
+  if (!cartItemsCount && !isCartLoading) {
     return (
       <div className={s.container}>
         <Headling> Корзина пока что пустая ...</Headling>

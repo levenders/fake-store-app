@@ -12,7 +12,7 @@ const LazyHistoryItem = lazy(() =>
 )
 
 export const HistoryPage = () => {
-  const { history, historyItems } = useHistoryItems()
+  const { history, historyItems, isHistoryLoading } = useHistoryItems()
 
   const dispatch = useAppDispatch()
 
@@ -20,7 +20,7 @@ export const HistoryPage = () => {
     dispatch(clearHistory())
   }
 
-  if (!historyItems) {
+  if (!historyItems && !isHistoryLoading) {
     return (
       <div className={s.container}>
         <Headling> История пока что пустая ...</Headling>
@@ -31,9 +31,8 @@ export const HistoryPage = () => {
   return (
     <div className={s.container}>
       <Headling>История поисков</Headling>
-
       <Suspense fallback={<Loader />}>
-        {historyItems && (
+        {Boolean(historyItems) && (
           <>
             <Button onClick={handleClick}>Очистить историю</Button>
             {history.map((h, i) => (

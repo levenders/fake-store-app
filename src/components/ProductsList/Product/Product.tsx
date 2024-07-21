@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
 
@@ -11,6 +11,9 @@ import { getPriceUsd } from '@/helpers/getPrice'
 import type { TransformProductItem } from '@/types'
 
 import s from './Product.module.css'
+import { useSelector } from 'react-redux'
+import { userSelector } from '@/store/userSlice'
+import { ROUTES } from '@/constants/routes'
 
 interface ProductProps {
   product: TransformProductItem
@@ -19,16 +22,24 @@ interface ProductProps {
 export const Product = ({ product }: ProductProps) => {
   const { id, title, image, price } = product
 
+  const user = useSelector(userSelector)
+
+  const navigate = useNavigate()
+
   const { isTheme } = useTheme()
 
-  const dispach = useAppDispatch()
+  const dispatch = useAppDispatch()
 
   const { countById, isCartLoadingById } = useCartItems(id)
 
   const fullPrice = getPriceUsd(price)
 
   const handleClick = () => {
-    dispach(addToCart({ id, count: 1, isLoading: isCartLoadingById }))
+    if (user) {
+      dispatch(addToCart({ id, count: 1, isLoading: isCartLoadingById }))
+    } else {
+      navigate(ROUTES.LOGIN)
+    }
   }
 
   return (

@@ -1,7 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import cn from 'classnames'
 
 import { Button, CounterButton, Headling, Loader } from '@/components'
+import { userSelector } from '@/store/userSlice'
 import { useCartItems } from '@/hooks/useCartItems'
 import { useAppDispatch } from '@/store'
 import { addToCart } from '@/store/cartSlice'
@@ -19,6 +21,8 @@ export const ProductPage = () => {
 
   const { id } = useParams()
 
+  const user = useSelector(userSelector)
+
   const { data: product, isLoading, error } = productApi.useGetProductQuery(id)
 
   const idAsNumber = Number(id) // необходимый фикс из-за возвращаемого типа от useParams
@@ -28,9 +32,13 @@ export const ProductPage = () => {
   const dispatch = useAppDispatch()
 
   const handleClick = () => {
-    dispatch(
-      addToCart({ id: idAsNumber, count: 1, isLoading: isCartLoadingById }),
-    )
+    if (user) {
+      dispatch(
+        addToCart({ id: idAsNumber, count: 1, isLoading: isCartLoadingById }),
+      )
+    } else {
+      navigate(ROUTES.LOGIN)
+    }
   }
 
   return (
