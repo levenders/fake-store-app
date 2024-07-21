@@ -4,9 +4,9 @@
 }
 
 .list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 350px);
   margin: 60px;
-  display: flex;
-  flex-wrap: wrap;
   justify-content: space-around;
   gap: 40px;
 }
