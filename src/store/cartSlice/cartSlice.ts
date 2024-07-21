@@ -42,7 +42,11 @@ interface RootState {
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
-  reducers: {},
+  reducers: {
+    restartCart: state => {
+      state.cart = initialState.cart
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(addToCart.pending, (state, action) => {
@@ -149,3 +153,5 @@ export const cartItemLoadingSelector = (id: number) => (state: RootState) => {
   const item = state.cartSlice.cart.find(item => item.id === id)
   return item ? item.isLoading : false
 }
+
+export const { restartCart } = cartSlice.actions

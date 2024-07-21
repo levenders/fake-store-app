@@ -30,7 +30,11 @@ interface RootState {
 export const historySlice = createSlice({
   name: 'history',
   initialState,
-  reducers: {},
+  reducers: {
+    restartHistory: state => {
+      state.history = initialState.history
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(getHistory.pending, state => {
@@ -90,3 +94,5 @@ export const historySelector = (state: RootState) => state.historySlice.history
 
 export const historyLoadingStatusSelector = (state: RootState) =>
   state.historySlice.loadingStatus
+
+export const { restartHistory } = historySlice.actions

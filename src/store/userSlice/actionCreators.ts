@@ -6,6 +6,9 @@ import {
 
 import { auth } from '@/config/firebase'
 
+import { restartCart } from '@store//cartSlice/cartSlice'
+import { restartHistory } from '@store/historySlice/historySlice'
+
 export const loginUser = createAsyncThunk(
   'user/login',
   async (
@@ -81,6 +84,8 @@ export const logoutUser = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       await auth.signOut()
+      thunkAPI.dispatch(restartCart())
+      thunkAPI.dispatch(restartHistory())
     } catch (error) {
       if (error instanceof Error) {
         return thunkAPI.rejectWithValue(error.message)
