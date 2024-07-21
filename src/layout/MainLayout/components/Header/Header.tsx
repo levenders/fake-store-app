@@ -43,7 +43,11 @@ export const Header = memo(function Header() {
       })}
     >
       <Link to={ROUTES.HOME}>
-        <img alt="logo" src="/ui-images/logo.png" className={s.logo} />
+        <img
+          alt="logo"
+          src="/fake-store-app/ui-images/logo.png"
+          className={s.logo}
+        />
       </Link>
       <Search />
       <Link to={ROUTES.HISTORY} className={cn(s.link, s.button)}>
