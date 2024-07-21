@@ -81,6 +81,7 @@ export const Search = () => {
     <div className={s.container} ref={ref}>
       <Input
         className={s.input}
+        placeholder="Поиск"
         value={inputValue}
         onFocus={handleInputFocus}
         onChange={handleInputChange}
