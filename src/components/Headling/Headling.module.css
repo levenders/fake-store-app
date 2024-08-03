@@ -4,3 +4,10 @@
   line-height: 120%;
   margin: 0;
 }
+
+@media (max-width: 320px) {
+  .headling {
+    font-size: 20px;
+    margin: 0 auto;
+  }
+}

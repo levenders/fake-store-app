@@ -49,3 +49,49 @@
 .center {
   align-self: center;
 }
+
+@media (max-width: 720px) {
+  .container {
+    margin: 10px;
+    padding: 30px;
+    width: 90%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    gap: 15px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .price {
+    font-size: 24px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 320px) {
+  .container {
+    margin: 20px auto;
+    padding: 10px;
+    width: 90%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    gap: 15px;
+  }
+
+  .title {
+    font-size: 12px;
+    text-align: center;
+    justify-content: center;
+    padding: 0px 10px;
+  }
+  .price {
+    font-size: 20px;
+    text-align: center;
+  }
+}

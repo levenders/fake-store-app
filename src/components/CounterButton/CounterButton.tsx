@@ -1,7 +1,7 @@
 import { Button, Loader } from '@/components'
-import { addToCart, decrementCartItem, removeCartItem } from '@/store/cartSlice'
 import { useCartItems } from '@/hooks/useCartItems'
 import { useAppDispatch } from '@/store'
+import { addToCart, decrementCartItem, removeCartItem } from '@/store/cartSlice'
 
 import s from './CounterButton.module.css'
 
@@ -28,7 +28,7 @@ export const CounterButton = ({ id }: CounterButtonProps) => {
   }
 
   return (
-    <Loader when={isCartLoadingById}>
+    <Loader when={isCartLoadingById} size="small">
       <div className={s.container}>
         <Button onClick={handleDecrementClick}>-</Button>
         <p className={s.counter}>{countById}</p>
