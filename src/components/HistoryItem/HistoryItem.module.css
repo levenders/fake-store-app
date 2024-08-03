@@ -29,3 +29,34 @@
 .button {
   margin-left: auto;
 }
+
+@media (max-width: 720px) {
+  .container {
+    width: 90%;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .query {
+    word-break: break-all;
+  }
+}
+
+@media (max-width: 320px) {
+  .container {
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .query {
+    font-size: 20px;
+    word-break: break-all;
+    text-align: center;
+  }
+
+  .button {
+    margin-left: 0;
+  }
+}
