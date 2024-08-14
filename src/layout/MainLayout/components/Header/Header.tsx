@@ -1,19 +1,19 @@
 import { memo } from 'react'
 
-import { Link, useNavigate } from 'react-router-dom'
 import cn from 'classnames'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { Button, Loader, Search } from '@/components'
-import { useAppDispatch } from '@/store'
+import { ROUTES } from '@/constants/routes'
+import { useTheme } from '@/context'
 import { useCart } from '@/hooks/useCart'
 import { useHistoryItems } from '@/hooks/useHistoryItems'
+import { useAppDispatch } from '@/store'
 import { logoutUser } from '@/store/userSlice/actionCreators'
-import { useTheme } from '@/context'
-import { ROUTES } from '@/constants/routes'
 
-import s from './Header.module.css'
-import { useSelector } from 'react-redux'
 import { userSelector } from '@/store/userSlice'
+import { useSelector } from 'react-redux'
+import s from './Header.module.css'
 
 export const Header = memo(function Header() {
   const { isTheme, toggleTheme } = useTheme()
@@ -43,7 +43,11 @@ export const Header = memo(function Header() {
       })}
     >
       <Link to={ROUTES.HOME}>
-        <img alt="logo" src="/ui-images/logo.png" className={s.logo} />
+        <img
+          alt="logo"
+          src="/fake-store-app/ui-images/logo.png"
+          className={s.logo}
+        />
       </Link>
       <Search />
       <Link to={ROUTES.HISTORY} className={cn(s.link, s.button)}>
